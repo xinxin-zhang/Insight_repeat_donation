@@ -42,7 +42,7 @@ public class donation_analytics {
     private static void sortRepeatDonators(){
         Collections.sort(repeatTable);
     }
-
+    //add new donator, name, zip and transaction amount are saved.
     private static void addNewDonator(){
         names.add(name);
         zip_codes.add(zip_code);
@@ -52,14 +52,14 @@ public class donation_analytics {
     private static void addNewRepeatDonator(){
         repeatTable.add(transaction_amt);
     }
-
+    //read percentile from in_percentile stream
     private void readPercentile() throws IOException {
         FileInputStream in_percentile = null;
         try{
             in_percentile = new FileInputStream(input_percentile);
-            //read percentile from in_percentile stream
+            
             percentile = in_percentile.read();
-            percentile -= 21;
+            percentile -= 21;    //convert string to integer
             if(percentile >=0 && percentile <=100){
                 in_percentile.close();
             }else{
@@ -72,8 +72,8 @@ public class donation_analytics {
             }
         }
     }
-
-    private boolean splitLines(String line){
+    //read the raw data and discard the useless input. Extract the fields we are interested. 
+    private boolean splitLines(String line){  
         String[] parts = line.split("\\|");
         if(!parts[15].isEmpty() || parts[0].isEmpty() || parts[7].isEmpty() || parts[10].isEmpty() || parts[13].isEmpty() || parts[14].isEmpty() || parts[10].length()<5 || parts[13].length()!=8 || Integer.parseInt(parts[13].substring(0,2))>12 || Integer.parseInt(parts[13].substring(2,4))>31)
             return false;        
@@ -85,7 +85,7 @@ public class donation_analytics {
         String other_id = parts[15];
         return true;
     }
-
+    //determin whether the new input is repeated donator. 
     private void handleLines(){
         int index;
         if(((index = names.indexOf(name))!=-1 ) && (zip_codes.get(index).equals(zip_code))){
