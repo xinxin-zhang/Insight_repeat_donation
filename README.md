@@ -32,3 +32,5 @@ The structure of this repo is like this
  The second one is my own inputs and outputs. 
  The input files(percentile.txt and itcont.txt) in input folder are subject to be replaced. This is the location where user can uplaod their own input files for testing or production.
  
+ The code is located at scr/com/company/  The key java code is donation_analytics.java  The comments and annotations are inside the java file. The tests are all passed. 
+ 
