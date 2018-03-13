@@ -57,9 +57,13 @@ public class donation_analytics {
         FileInputStream in_percentile = null;
         try{
             in_percentile = new FileInputStream(input_percentile);
-            
-            percentile = in_percentile.read();
-            percentile -= 21;    //convert string to integer
+            int i = 0;
+            int j = 0;
+            percentile = 0 ;
+            while((i = in_percentile.read())!=-1) {
+                j++;
+                percentile = (int) (percentile * Math.pow(10, j - 1) + i - 48); 
+            }    
             if(percentile >=0 && percentile <=100){
                 in_percentile.close();
             }else{
